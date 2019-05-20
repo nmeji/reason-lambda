@@ -1,0 +1,18 @@
+version: "3"
+services:
+  bsb:
+    image: bs-platform:4-alpine
+    build:
+      context: .
+      dockerfile: Dockerfile.bsb
+    volumes:
+      - .:/opt/home:Z
+    working_dir: /opt/home
+
+  serverless:
+    image: amaysim/serverless:1.27.1
+    env_file: .env
+    working_dir: /opt/app
+    volumes:
+      - .:/opt/app
+    entrypoint: /usr/local/bin/sls

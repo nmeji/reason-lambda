@@ -1,0 +1,16 @@
+service: hello
+package:
+  artifact: dist.zip
+provider:
+  name: aws
+  region: ${env:AWS_REGION}
+  memorySize: 128
+  timeout: 5
+  runtime: nodejs8.10
+functions:
+  hello:
+    handler: Identity.hello
+    events:
+      - http:
+          path: /hello
+          method: get
